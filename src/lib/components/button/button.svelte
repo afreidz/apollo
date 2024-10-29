@@ -1,238 +1,177 @@
 <script lang="ts" module>
+	import { classed, type VariantProps } from '@/lib/utils/classed.ts';
 	import { focusableClasses, transitionClasses } from '@/lib/utils/classes.ts';
 
 	export const buttonVariants = classed(
+		focusableClasses,
 		`
-			${focusableClasses}
-			${transitionClasses}
-
-			all-button-styles
 			inline-flex
 			items-center
 			rounded-normal
-			hover:grayscale-hover
-			active:translate-y-px
 		`,
 		{
 			variants: {
 				size: {
 					airy: `
-						v-size-airy
 						h-airy
 						ps-airy
 						pe-airy
 					`,
 					tight: `
-						v-size-tight
 						h-tight
 						ps-tight
 						pe-tight
 					`,
 					normal: `
-						v-size-normal
 						h-normal
 						ps-normal
 						pe-normal
 					`
 				},
+				contrastShift: {
+					true: ''
+				},
 				pressed: {
-					true: `
-						v-pressed
-						font-medium
-						to-black/20
-						from-black/20
-						bg-gradient-to-b
-					`
+					true: ''
 				},
 				kind: {
-					ghost: `
-						v-type-ghost
-						text-dark
-						border-none
-						bg-opacity-0
-						dark:text-light
-						dark:bg-opacity-0
-					`,
 					primary: `
-						v-type-primary
+						bg-dark
 						text-light
 						border-none
 						bg-opacity-100
+						dark:bg-light
 						dark:text-dark
 						dark:bg-opacity-100
 					`,
-					secondary: `
-						v-type-secondary
-						text-dark
-						border-none
-						bg-opacity-10
-						dark:text-light
-						dark:bg-opacity-10
-					`,
 					tint: `
-						v-type-tint
 						border
-						text-dark
 						bg-opacity-5
-						dark:text-light
 						border-opacity-50
 						dark:bg-opacity-5
 						dark:border-opacity-50
 					`,
-					outline: `
-						v-type-outline
-						border
-						text-dark
+					ghost: `
+						border-none
 						bg-opacity-0
-						dark:text-light
-						border-opacity-20
 						dark:bg-opacity-0
-						dark:border-opacity-20
+					`,
+					secondary: `
+						border-none
+						bg-opacity-10
+						dark:bg-opacity-10
+					`,
+					outline: `
+						border
+						bg-opacity-0
+						border-opacity-40
+						dark:bg-opacity-0
+						dark:border-opacity-40
 					`
 				},
 				variant: {
-					info: `
-						v-variant-info
-						bg-info
-					`,
-					success: `
-						v-variant-success
-						bg-success
-					`,
-					warning: `
-						v-variant-warning
-						bg-warning
-					`,
-					danger: `
-						v-variant-danger
-						bg-danger
-						border-danger
-					`,
 					normal: `
-						v-variant-normal
 						bg-dark
 						text-dark
 						border-dark
 						dark:bg-light
-						dark:text-dark
+						dark:text-light
 						dark:border-light
+					`,
+					info: `
+						bg-info
+						text-info
+						border-info
+						dark:bg-info
+						dark:text-info
+						dark:border-info
+					`,
+					success: `
+						bg-success
+						text-success
+						border-success
+						dark:bg-success
+						dark:text-success
+						dark:border-success
+					`,
+					warning: `
+						bg-warning
+						text-warning
+						border-warning
+						dark:bg-warning
+						dark:text-warning
+						dark:border-warning
+					`,
+					danger: `
+						bg-danger
+						text-danger
+						border-danger
+						dark:bg-danger
+						dark:text-danger
+						dark:border-danger
+					`,
+					accent: `
+						bg-accent
+						text-accent
+						border-accent
+						dark:bg-accent
+						dark:text-accent
+						dark:border-accent
 					`
 				}
 			},
+
 			compoundVariants: [
 				{
-					kind: 'ghost',
-					variant: 'danger',
-					class: `
-						v-compound-ghost-danger
-						!text-danger
-						dark:!text-danger
-					`
-				},
-				{
-					kind: 'outline',
-					variant: 'danger',
-					class: `
-						v-compound-outline-danger
-						border-opacity-40
-						dark:border-opacity-40
-					`
-				},
-				{
+					variant: ['info', 'success', 'warning', 'danger', 'accent', 'normal'],
 					kind: 'secondary',
-					variant: 'danger',
-					class: `
-						v-compound-secondary-danger
-						bg-opacity-35
-						dark:bg-opacity-35
-					`
+					class: 'text-dark dark:text-light'
 				},
 				{
-					pressed: true,
-					kind: 'ghost',
-					class: `
-						v-compound-ghost-pressed
-						!bg-opacity-5
-						!to-transparent
-						!from-transparent
-						dark:!bg-opacity-5
-					`
+					variant: ['info', 'success', 'warning', 'danger', 'accent', 'normal'],
+					kind: 'primary',
+					class: 'text-light dark:text-dark'
 				},
 				{
 					kind: 'tint',
 					pressed: true,
-					class: `
-						v-compound-tint-pressed
-						!bg-opacity-10
-						dark:!bg-opacity-20
-					`
+					class: 'bg-opacity-10 dark:bg-opacity-15'
 				},
 				{
-					pressed: true,
-					kind: 'secondary',
-					class: `
-						v-compound-secondary-pressed
-						!to-transparent
-						!bg-opacity-100
-						!from-transparent
-					`
-				},
-				{
-					pressed: true,
-					kind: 'secondary',
-					variant: 'normal',
-					class: `
-						v-compound-secondary-pressed-normal
-						!text-light
-						dark:!text-dark
-					`
+					pressed: false,
+					kind: 'outline',
+					variant: ['info', 'success', 'warning', 'danger', 'accent', 'normal'],
+					class: 'text-dark dark:text-light'
 				},
 				{
 					pressed: true,
 					kind: 'outline',
-					class: `
-						v-compound-outline-pressed
-						!to-black/5
-						!from-black/5
-						dark:!to-black/20
-						!border-opacity-100
-						dark:!from-black/20
-					`
+					variant: ['info', 'success', 'warning', 'danger', 'accent', 'normal'],
+					class: 'border-opacity-80 dark:border-opacity-80'
 				},
 				{
 					pressed: true,
-					variant: 'danger',
-					class: `
-						v-compound-danger-pressed
-						!text-danger
-					`
-				},
-				{
-					pressed: true,
-					kind: 'primary',
-					variant: 'normal',
-					class: `
-						v-compound-primary-normal-pressed
-						bg-opacity-70
-					`
-				},
-				{
-					pressed: true,
-					kind: 'primary',
-					variant: 'danger',
-					class: `
-						v-compound-primary-danger-pressed
-						!text-light
-					`
+					kind: ['ghost', 'primary'],
+					variant: ['info', 'success', 'warning', 'danger', 'accent', 'normal'],
+					class: 'bg-gradient-to-b from-black/15 to-black/15'
 				},
 				{
 					pressed: true,
 					kind: 'secondary',
-					variant: 'danger',
-					class: `
-						v-compound-secondary-danger-pressed
-						!text-light
-					`
+					variant: ['info', 'success', 'warning', 'danger', 'accent', 'normal'],
+					class: 'bg-opacity-100 dark:bg-opacity-100 text-light dark:text-dark'
+				},
+				{
+					contrastShift: true,
+					kind: ['primary', 'secondary'],
+					class: 'text-light dark:text-dark'
+				},
+				// NOT YET TESTED 👇🏻
+				{
+					pressed: true,
+					contrastShift: true,
+					kind: ['primary', 'secondary'],
+					class: 'text-dark dark:text-light'
 				}
 			]
 		}
@@ -240,19 +179,17 @@
 </script>
 
 <script lang="ts">
-	import { classed, type VariantProps } from '@tw-classed/core';
-
 	type Props = Apollo.PolymorphicProps<'a' | 'button'> & {
-		on?: boolean;
+		pressed?: boolean;
 		disabled?: boolean;
 		onpress?: (e: TouchEvent | MouseEvent) => void;
 	} & VariantProps<typeof buttonVariants>;
 
 	let {
 		class: customClasses = '',
+		pressed = $bindable(),
 		variant = 'normal',
 		disabled = false,
-		on = $bindable(),
 		kind = 'primary',
 		size = 'normal',
 		as = 'button',
@@ -262,17 +199,21 @@
 	}: Props = $props();
 
 	let classList = $derived.by(() => {
-		return buttonVariants({ size, variant, kind: kind, pressed: on }) + ' ' + customClasses;
+		return (
+			buttonVariants({ size, variant, kind: kind, pressed: pressed }) +
+			` ${pressed === undefined ? [transitionClasses, 'active:translate-y-px'].join(' ') : ' '}` +
+			customClasses
+		);
 	});
 
 	let aria = $derived.by(() => ({
 		'aria-disabled': disabled === true ? true : undefined,
-		'aria-pressed': !on ? undefined : on
+		'aria-pressed': !pressed ? undefined : pressed
 	}));
 
 	function handlePress(e: TouchEvent | MouseEvent) {
 		if (onpress) return onpress(e);
-		if (on !== undefined) return (on = !on);
+		if (pressed !== undefined) return (pressed = !pressed);
 	}
 </script>
 

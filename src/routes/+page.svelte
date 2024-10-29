@@ -4,7 +4,7 @@
 </script>
 
 <div class="p-4 flex gap-8">
-	<div class="rounded-normal bg-white/5 p-4">
+	<div class="rounded-normal bg-white/5 p-4 px-6">
 		<h2>Standard</h2>
 		<ul>
 			<li>
@@ -74,7 +74,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="rounded bg-white/5 p-4">
+	<div class="rounded bg-white/5 p-4 px-6">
 		<h2>Toggle</h2>
 		<ul>
 			<li>
@@ -82,11 +82,11 @@
 				<ul>
 					<li>
 						<span>Normal</span>
-						<Button.Root as="button" bind:on>Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on}>Button</Button.Root>
 					</li>
 					<li>
 						<span>Danger</span>
-						<Button.Root as="button" bind:on variant="danger">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} variant="danger">Button</Button.Root>
 					</li>
 				</ul>
 			</li>
@@ -95,11 +95,13 @@
 				<ul>
 					<li>
 						<span>Normal</span>
-						<Button.Root as="button" bind:on kind="tint">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="tint">Button</Button.Root>
 					</li>
 					<li>
 						<span>Danger</span>
-						<Button.Root as="button" bind:on kind="tint" variant="danger">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="tint" variant="danger"
+							>Button</Button.Root
+						>
 					</li>
 				</ul>
 			</li>
@@ -108,11 +110,13 @@
 				<ul>
 					<li>
 						<span>Normal</span>
-						<Button.Root as="button" bind:on kind="outline">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="outline">Button</Button.Root>
 					</li>
 					<li>
 						<span>Danger</span>
-						<Button.Root as="button" bind:on kind="outline" variant="danger">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="outline" variant="danger"
+							>Button</Button.Root
+						>
 					</li>
 				</ul>
 			</li>
@@ -121,11 +125,13 @@
 				<ul>
 					<li>
 						<span>Normal</span>
-						<Button.Root as="button" bind:on kind="ghost">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="ghost">Button</Button.Root>
 					</li>
 					<li>
 						<span>Danger</span>
-						<Button.Root as="button" bind:on kind="ghost" variant="danger">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="ghost" variant="danger"
+							>Button</Button.Root
+						>
 					</li>
 				</ul>
 			</li>
@@ -134,11 +140,13 @@
 				<ul>
 					<li>
 						<span>Normal</span>
-						<Button.Root as="button" bind:on kind="secondary">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="secondary">Button</Button.Root>
 					</li>
 					<li>
 						<span>Danger</span>
-						<Button.Root as="button" bind:on kind="secondary" variant="danger">Button</Button.Root>
+						<Button.Root as="button" bind:pressed={on} kind="secondary" variant="danger"
+							>Button</Button.Root
+						>
 					</li>
 				</ul>
 			</li>
@@ -150,6 +158,7 @@
 	h2 {
 		font-weight: bold;
 		font-size: 22px;
+		margin-bottom: 30px;
 	}
 	span {
 		display: inline-block;
@@ -158,7 +167,7 @@
 	li {
 		margin-bottom: 10px;
 	}
-	ul ul {
+	ul {
 		margin-left: 20px;
 	}
 </style>
