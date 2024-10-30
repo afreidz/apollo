@@ -9,22 +9,26 @@ export default {
 	theme: {
 		extend: {
 			height: {
-				normal: theme.spacing['10'],
-				tight: theme.spacing['6'],
-				airy: theme.spacing['14']
+				normal: theme.spacing[10],
+				tight: theme.spacing[6],
+				airy: theme.spacing[14]
 			},
 			spacing: {
-				normal: theme.spacing['4'],
-				tight: theme.spacing['2'],
-				airy: theme.spacing['8']
+				normal: theme.spacing[4],
+				tight: theme.spacing[2],
+				airy: theme.spacing[8]
 			},
 			borderRadius: {
 				normal: '0.3rem'
 			},
 			colors: {
-				dark: colors.neutral['950'],
-				light: colors.neutral['50'],
-				danger: colors.rose['500']
+				info: colors.blue[500],
+				dark: colors.neutral[950],
+				light: colors.neutral[50],
+				danger: colors.rose[500],
+				warning: colors.amber[500],
+				accent: colors.purple[400],
+				success: colors.emerald[500]
 			}
 		}
 	},

@@ -2,9 +2,21 @@
 	import { classed, type VariantProps } from '@/lib/utils/classed.ts';
 	import { focusableClasses, transitionClasses } from '@/lib/utils/classes.ts';
 
+	type BaseProps = VariantProps<typeof buttonVariants> & {
+		class?: string;
+		pressed?: boolean;
+		disabled?: boolean;
+		onpress?: (e: TouchEvent | MouseEvent) => void;
+	};
+
+	export type ButtonProps =
+		| Apollo.ElementProps<BaseProps, 'a'>
+		| Apollo.ElementProps<BaseProps, 'button'>;
+
 	export const buttonVariants = classed(
 		focusableClasses,
 		`
+			select-none
 			inline-flex
 			items-center
 			rounded-normal
@@ -120,7 +132,6 @@
 					`
 				}
 			},
-
 			compoundVariants: [
 				{
 					variant: ['info', 'success', 'warning', 'danger', 'accent', 'normal'],
@@ -179,12 +190,6 @@
 </script>
 
 <script lang="ts">
-	type Props = Apollo.PolymorphicProps<'a' | 'button'> & {
-		pressed?: boolean;
-		disabled?: boolean;
-		onpress?: (e: TouchEvent | MouseEvent) => void;
-	} & VariantProps<typeof buttonVariants>;
-
 	let {
 		class: customClasses = '',
 		pressed = $bindable(),
@@ -196,14 +201,14 @@
 		children,
 		onpress,
 		...rest
-	}: Props = $props();
+	}: ButtonProps = $props();
 
 	let classList = $derived.by(() => {
-		return (
-			buttonVariants({ size, variant, kind: kind, pressed: pressed }) +
-			` ${pressed === undefined ? [transitionClasses, 'active:translate-y-px'].join(' ') : ' '}` +
+		return [
+			buttonVariants({ size, variant, kind: kind, pressed: pressed }),
+			pressed === undefined ? transitionClasses : 'active:translate-y-px',
 			customClasses
-		);
+		].join(' ');
 	});
 
 	let aria = $derived.by(() => ({
@@ -219,8 +224,8 @@
 
 <svelte:element
 	this={as}
-	{...rest}
 	{...aria}
+	{...rest}
 	{disabled}
 	tabindex="0"
 	role="button"

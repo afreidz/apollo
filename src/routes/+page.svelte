@@ -1,5 +1,17 @@
 <script lang="ts">
 	import * as Button from '@/lib/components/button/index.ts';
+	import type { ButtonProps } from '@/lib/components/button/button.svelte';
+
+	let variants: ButtonProps['variant'][] = [
+		'normal',
+		'success',
+		'warning',
+		'danger',
+		'info',
+		'accent'
+	];
+	let kinds: ButtonProps['kind'][] = ['primary', 'secondary', 'tint', 'outline', 'ghost'];
+
 	let on = $state(true);
 </script>
 
@@ -7,149 +19,37 @@
 	<div class="rounded-normal bg-white/5 p-4 px-6">
 		<h2>Standard</h2>
 		<ul>
-			<li>
-				<span>Primary:</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="a">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" variant="danger">Button</Button.Root>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Tint:</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" kind="tint">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" kind="tint" variant="danger">Button</Button.Root>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Outline</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" kind="outline">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" kind="outline" variant="danger">Button</Button.Root>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Ghost</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" kind="ghost">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" kind="ghost" variant="danger">Button</Button.Root>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Secondary</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" kind="secondary">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" kind="secondary" variant="danger">Button</Button.Root>
-					</li>
-				</ul>
-			</li>
+			{#each kinds as kind}
+				<li>
+					<span>{kind}</span>
+					<ul>
+						{#each variants as variant}
+							<li>
+								<span>{variant}</span>
+								<Button.Root {kind} {variant}>Button</Button.Root>
+							</li>
+						{/each}
+					</ul>
+				</li>
+			{/each}
 		</ul>
 	</div>
 	<div class="rounded bg-white/5 p-4 px-6">
 		<h2>Toggle</h2>
 		<ul>
-			<li>
-				<span>Primary:</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" bind:pressed={on}>Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" bind:pressed={on} variant="danger">Button</Button.Root>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Tint:</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" bind:pressed={on} kind="tint">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" bind:pressed={on} kind="tint" variant="danger"
-							>Button</Button.Root
-						>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Outline</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" bind:pressed={on} kind="outline">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" bind:pressed={on} kind="outline" variant="danger"
-							>Button</Button.Root
-						>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Ghost</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" bind:pressed={on} kind="ghost">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" bind:pressed={on} kind="ghost" variant="danger"
-							>Button</Button.Root
-						>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>Secondary</span>
-				<ul>
-					<li>
-						<span>Normal</span>
-						<Button.Root as="button" bind:pressed={on} kind="secondary">Button</Button.Root>
-					</li>
-					<li>
-						<span>Danger</span>
-						<Button.Root as="button" bind:pressed={on} kind="secondary" variant="danger"
-							>Button</Button.Root
-						>
-					</li>
-				</ul>
-			</li>
+			{#each kinds as kind}
+				<li>
+					<span>{kind}</span>
+					<ul>
+						{#each variants as variant}
+							<li>
+								<span>{variant}</span>
+								<Button.Root bind:pressed={on} {kind} {variant}>Button</Button.Root>
+							</li>
+						{/each}
+					</ul>
+				</li>
+			{/each}
 		</ul>
 	</div>
 </div>
